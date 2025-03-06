@@ -1,121 +1,37 @@
-name: 微信读书热力图生成
+name: Generate Heatmap
 
 on:
   schedule:
-    # 每天北京时间上午8:10运行（UTC 00:10）
-    - cron: '10 0 * * *'
-  workflow_dispatch: # 允许手动触发
+    - cron: '0 0 * * *'  # 每天 UTC 时间 00:00 运行
+  workflow_dispatch:  # 允许手动触发
 
 jobs:
-  generate-heatmap:
+  generate:
     runs-on: ubuntu-latest
     steps:
-      - name: 检出代码库
-        uses: actions/checkout@v4
-        
-      - name: 设置Python环境
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-        
-      - name: 获取当前年份
-        id: date
-        run: echo "YEAR=$(date +%Y)" >> $GITHUB_ENV
-        
-      - name: 处理微信读书数据
+          pip install requests svgwrite
+
+      - name: Generate heatmap
+        env:
+          WEREAD_COOKIE: ${{ secrets.WEREAD_COOKIE }}
+          START_YEAR: ${{ secrets.START_YEAR }}
+          END_YEAR: ${{ secrets.END_YEAR }}
+        run: python heatmap.py
+
+      - name: Commit and push changes
         run: |
-          # 创建数据目录
-          mkdir -p data
-          # 复制数据文件
-          cp readtiming.json data/
-          # 运行Python处理脚本
-          python3 - << 'EOF'
-          import json
-          import os
-          from datetime import datetime
-          
-          def process_weread_data():
-              """
-              处理微信读书的readtiming.json数据，转换时间戳为日期格式
-              """
-              # 读取原始JSON文件
-              input_file = 'data/readtiming.json'
-              output_file = 'data/processed_readtiming.json'
-              
-              print(f"开始处理微信读书数据：{input_file}")
-              
-              try:
-                  with open(input_file, 'r', encoding='utf-8') as file:
-                      data = json.load(file)
-                  
-                  # 处理阅读时间数据
-                  read_times = data.get('readTimes', {})
-                  formatted_data = {}
-                  
-                  for timestamp_str, seconds in read_times.items():
-                      # 转换时间戳为日期（YYYY-MM-DD格式）
-                      try:
-                          timestamp = int(timestamp_str)
-                          date = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d')
-                          formatted_data[date] = seconds
-                      except ValueError as e:
-                          print(f"警告：无法解析时间戳 {timestamp_str}: {e}")
-                  
-                  # 创建输出数据结构
-                  output_data = {
-                      "dailyReadTimes": formatted_data,
-                      "metadata": {
-                          "processedAt": datetime.now().isoformat(),
-                          "totalDays": len(formatted_data),
-                          "totalReadingSeconds": sum(formatted_data.values())
-                      }
-                  }
-                  
-                  # 保存处理后的数据
-                  with open(output_file, 'w', encoding='utf-8') as file:
-                      json.dump(output_data, file, ensure_ascii=False, indent=2)
-                  
-                  print(f"数据处理完成，已保存到：{output_file}")
-                  print(f"总计处理了{len(formatted_data)}天的阅读数据")
-                  
-                  return True
-              
-              except Exception as e:
-                  print(f"处理数据时出错：{e}")
-                  return False
-          
-          process_weread_data()
-          EOF
-        
-      - name: 生成热力图
-        run: |
-          echo "开始生成微信读书热力图..."
-          github_heatmap weread --year $YEAR --me "${{ secrets.NAME }}" --without-type-name --background-color=${{ vars.background_color || '#FFFFFF' }} --track-color=${{ vars.track_color || '#ACE7AE' }} --special-color1=${{ vars.special_color || '#69C16E' }} --special-color2=${{ vars.special_color2 || '#549F57' }} --dom-color=${{ vars.dom_color || '#EBEDF0' }} --text-color=${{ vars.text_color || '#000000' }}
-          echo "热力图生成完成"
-        
-      - name: 保存热力图到输出目录
-        run: |
-          # 创建输出目录
-          mkdir -p output
-          # 移动生成的热力图
-          mv heatmap_*.png output/ || echo "未找到热力图文件"
-          # 为当前日期的热力图创建副本
-          for f in output/heatmap_*.png; do
-            if [ -f "$f" ]; then
-              cp "$f" "output/weread_heatmap_$(date +%Y-%m-%d).png"
-              break
-            fi
-          done
-          
-      - name: 提交并推送更改
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add output/
-          git commit -m "更新微信读书热力图 $(date +%Y-%m-%d)" || echo "没有需要提交的更改"
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add heatmap.svg
+          git commit -m "Update heatmap [skip ci]"
           git push
