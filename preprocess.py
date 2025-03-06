@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 
 # 读取 JSON 文件
-with open('/heatmapreadtiming.json', 'r') as f:
+with open('heatmapreadtiming.json', 'r') as f:
     data = json.load(f)
 
 # 转换时间戳为日期，并过滤有效数据
