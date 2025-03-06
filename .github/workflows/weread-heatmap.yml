@@ -38,4 +38,4 @@ jobs:
           git config --global user.email "action@github.com"
           git add heatmap.svg
           git commit -m "Update heatmap [skip ci]"
-          git push
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git main
