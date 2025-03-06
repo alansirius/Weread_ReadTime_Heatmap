@@ -1,7 +1,5 @@
 requests
-notion-client
 github-heatmap
 retrying
 pendulum
 python-dotenv
-weread2notionpro
