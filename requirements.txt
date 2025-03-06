@@ -1,5 +1,0 @@
-requests
-github-heatmap
-retrying
-pendulum
-python-dotenv
