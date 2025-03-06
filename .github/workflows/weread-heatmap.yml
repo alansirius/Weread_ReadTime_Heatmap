@@ -35,7 +35,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}  # 使用 TOKEN 进行身份验证
         run: |
           git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
+          git config --global user.email "action@github.com"
           git add heatmap.svg
           git commit -m "Update heatmap [skip ci]"
           git push
