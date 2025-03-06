@@ -2,14 +2,14 @@ name: Generate Reading Heatmap
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # 每天更新
+    - cron: '0 0 * * *'  # 每天UTC时间0点运行
   workflow_dispatch:
 
 jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -20,21 +20,29 @@ jobs:
       - name: Install dependencies
         run: pip install github_heatmap
 
-      - name: Process data and generate heatmap
+      - name: Process data
         run: |
-          python preprocess.py  # 运行数据预处理脚本
-          github_heatmap csv \
-            --file reading_data.csv \
-            --year $(date +%Y) \
-            --date-format "%Y-%m-%d" \
-            --value-column "ReadingTime(seconds)" \
-            --color-rules '0:#EBEDF0,60:#ACE7AE,1800:#69C16E,3600:#549F57,10800:#2E7D32,18000:#1B5E20' \
-            --legend-scale "0s,1m,30m,1h,3h,5h" \
+          python preprocess.py
+
+      - name: Generate SVG
+        run: |
+          github_heatmap json \
+            --file processed_data.json \
+            --date-field "date" \
+            --value-field "value" \
+            --color-rules '0:#EBEDF0,1:#ACE7AE,30:#69C16E,60:#549F57,180:#2E7D32,300:#1B5E20' \
+            --legend-scale "0m,1m,30m,1h,3h,5h" \
             --without-type-name \
             --background-color "#FFFFFF" \
             --output reading_heatmap.svg
 
-      - name: Commit and push
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: heatmap
+          path: reading_heatmap.svg
+
+      - name: Commit and Push
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "Update reading heatmap"
