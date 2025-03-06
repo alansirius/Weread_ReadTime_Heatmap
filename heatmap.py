@@ -218,7 +218,7 @@ def main():
     
     # 动态计算 SVG 高度
     year_count = poster.end_year - poster.start_year + 1
-    svg_height = 100 + year_count * 200  # 每增加一年，高度增加 200
+    svg_height = 100 + year_count * 115  # 每增加一年，高度增加 200
 
     dr = Drawing('heatmap.svg', size=(800, svg_height))
     offset = Offset(50, 50)
