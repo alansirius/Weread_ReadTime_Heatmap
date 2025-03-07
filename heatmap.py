@@ -7,12 +7,12 @@ from svgwrite import Drawing
 from svgwrite.animate import Animate
 
 # Constants from github_heatmap.config
-COLOR_TUPLE = [
-    ("#4DD2FF", "#FF6B6B", "#FFE66D"),
-    ("#4DD2FF", "#FF6B6B", "#FFE66D"),
-    ("#4DD2FF", "#FF6B6B", "#FFE66D"),
-]
-DEFAULT_DOM_COLOR = "#f7f7f7"  # 修改空白格子背景色
+TRACK_COLOR = "#9BE9A8"
+TRACK_SPECIAL_COLOR = "#40C463"
+TRACK_SPECIAL2_COLOR = "#30A14E"
+TRACK_SPECIAL3_COLOR = "#216E39"
+DEFAULT_DOM_COLOR = "#EBEDF0" 
+TEXT_COLOR = "#2D3436"
 DOM_BOX_DICT = {
     1: {"dom": [(10, 10)]},
     2: {"dom": [(10, 5), (10, 5)]},
@@ -175,8 +175,6 @@ def refresh_cookies(cookie):
             元组 (是否成功, 新的cookies)
         """
         print("尝试刷新cookies...")
-        print("注意: 由于微信读书的认证系统通常需要扫描二维码，")
-        print("因此可能无法在没有用户交互的情况下实现完全自动刷新。")
         
         url = "https://weread.qq.com/"
         headers = {
@@ -186,7 +184,7 @@ def refresh_cookies(cookie):
         try:
             response = requests.get(url, headers=headers)
             new_cookies = response.cookies.get_dict()
-            
+    
             # 更新cookie
             cookie_parts = cookie.split(';')
             updated_cookie = []
@@ -206,9 +204,9 @@ def refresh_cookies(cookie):
             return False, None
 
 def main():
-    cookie = os.getenv("WEREAD_COOKIE")  # 从环境变量中获取 cookie?
+    cookie = os.getenv("WEREAD_COOKIE") 
     if not cookie:
-        raise Exception("WEREAD_COOKIE environment variable is required")
+        raise Exception("WEREAD_COOKIE 未设置")
     
     data = None  # 初始化data变量
 
@@ -233,11 +231,12 @@ def main():
             self.tracks = None
             self.years = []
             self.colors = {
-                "track": "#4DD2FF",
-                "special": "#FF6B6B",
-                "special2": "#FFE66D",
-                "text": "#2D3436",
-                "dom": "#f7f7f7"  # 修改空白格子背景色
+                "track": TRACK_COLOR,
+                "special": TRACK_SPECIAL_COLOR,
+                "special2": TRACK_SPECIAL2_COLOR,
+                "special3": TRACK_SPECIAL3_COLOR,
+                "dom": DEFAULT_DOM_COLOR,
+                "text": TEXT_COLOR
             }
             self.units = "secs"
             self.with_animation = False
