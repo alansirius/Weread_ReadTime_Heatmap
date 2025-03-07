@@ -25,7 +25,7 @@ MONTH_NAMES = [
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ]
 YEAR_FONT_SIZE = 14
-MONTH_FONT_SIZE = 10
+MONTH_FONT_SIZE = 
 DOM_BOX_PADING = 2
 DOM_BOX_RADIUS = 2
 
@@ -291,7 +291,7 @@ def main():
         NAME,
         insert=(0, 20), 
         fill=poster.colors["text"],
-        style=f"font-size:20px; font-family:Arial;"
+        style=f"font-size:20px; font-family:Arial;font-weight:bold;"
     ))
     
     drawer.draw(dr, offset)
