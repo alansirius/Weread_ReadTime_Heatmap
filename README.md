@@ -1,5 +1,8 @@
 # 微信阅读阅读时长的热力图生成
 
+## 展示
+<img src="https://raw.githubusercontent.com/ZiGmaX809/WereadHeatmap/main/heatmap.svg">
+
 ## 说明
 
 之前是使用[Weread2Notion](https://github.com/malinkang/weread2notion-pro.git)进行生成，因去年转向Obsidian，Obsidian中的Weread插件跟符合我的胃口，我也因此搞了个[obsidian-readingcard](https://github.com/ZiGmaX809/obsidian-readingcard-template.git)的模板，用来展示微信阅读的进度
