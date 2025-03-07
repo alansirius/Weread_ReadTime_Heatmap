@@ -187,7 +187,6 @@ def refresh_cookies(cookie):
         try:
             response = requests.get(url, headers=headers)
             new_cookies = response.cookies.get_dict()
-            print(f"刷新后的cookies: {new_cookies}")
             
             # 更新cookie
             cookie_parts = cookie.split(';')
