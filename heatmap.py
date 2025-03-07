@@ -20,6 +20,7 @@ DOM_BOX_PADING = 2              # 格子间距
 DOM_BOX_RADIUS = 2              # 格子圆角
 YEAR_FONT_SIZE = 14             # 年份字体大小
 MONTH_FONT_SIZE = 12            # 月份字体大小
+SUMMARY_FONT_SIZE = 12          # 年度总结字体大小
 MONTH_NAMES = [
     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -84,6 +85,7 @@ class Drawer:
         self.poster = poster
         self.year_style = f"font-size:{YEAR_FONT_SIZE}px; font-family:Arial;"
         self.month_names_style = f"font-size:{MONTH_FONT_SIZE}px; font-family:Arial"
+        self.summary_style = f"font-size:{SUMMARY_FONT_SIZE}px; font-family:Arial; font-style:italic;"
 
     def process_read_times(self, read_times):
         """处理阅读时间数据，将时间戳转换为日期格式"""
@@ -144,6 +146,9 @@ class Drawer:
 
     def draw_one_calendar(self, dr, year, offset):
         """绘制单年的日历热力图"""
+        # 存储初始Y偏移以便后面添加年度总结
+        initial_y = offset.y
+        
         # 计算该年1月1日是星期几(0是周一，6是周日)
         start_date_weekday, _ = calendar.monthrange(year, 1)
         
@@ -166,11 +171,11 @@ class Drawer:
         else:
             year_duration = f"{year_hours}小时{year_minutes}分钟"
 
-        # 添加年份标题
+        # 添加年份标题（不再显示阅读时间）
         offset.y += DOM_BOX_PADING + YEAR_FONT_SIZE
         dr.add(
             dr.text(
-                f"{year}: {year_duration}",
+                f"{year}",
                 insert=offset.tuple(),
                 fill=self.poster.colors["text"],
                 style=self.year_style,
@@ -227,8 +232,22 @@ class Drawer:
                     dr.add(rect)
                 
                 github_rect_day += datetime.timedelta(1)
+        
+        # 计算最后一个格子的位置
+        last_box_y = offset.y + size * 7
+        
+        # 在日历底部添加年度总阅读时间
+        dr.add(
+            dr.text(
+                f"年度总阅读时间: {year_duration}",
+                insert=(offset.x, last_box_y + 15),  # 放在最后一行格子下方
+                fill=self.poster.colors["text"],
+                style=self.summary_style,
+            )
+        )
                 
-        offset.y += size * 7 + 10  # 增加年份之间的间距
+        # 更新Y偏移，为下一年的热力图留出空间
+        offset.y = last_box_y + 30  # 增加足够的空间放置年度总结
 
     def draw(self, dr, offset, is_summary=False):
         """绘制完整的热力图"""
@@ -343,8 +362,8 @@ def calculate_svg_dimensions(poster):
     
     # 计算宽度：53周 * 格子尺寸 + 月份标签宽度
     svg_width = 54 * (cell_size + padding) + month_label_width
-    # 计算高度：年份数量 * (7行格子 + 标题高度 + 年份间距) + 图例高度
-    svg_height = year_count * (7 * (cell_size + padding) + 30) + 30  # 需要图例则增加70
+    # 计算高度：年份数量 * (7行格子 + 标题高度 + 年份间距 + 年度总结高度) + 图例高度
+    svg_height = year_count * (7 * (cell_size + padding) + 30 + 20) + 30  # 增加每年底部总结的高度
     
     return svg_width, svg_height
 
