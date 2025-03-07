@@ -36,5 +36,5 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "action@github.com"
           git add heatmap.svg
-          git commit -m "Update heatmap [skip ci]"
-          git push
+          git commit -m "Update heatmap [skip ci]" || echo "nothing to commit"
+          git push || echo "nothing to push"
