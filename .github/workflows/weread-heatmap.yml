@@ -21,8 +21,9 @@ jobs:
       - name: Generate heatmap
         env:
           WEREAD_COOKIE: ${{ secrets.WEREAD_COOKIE }}
-          START_YEAR: ${{ secrets.START_YEAR }}
-          END_YEAR: ${{ secrets.END_YEAR }}
+          START_YEAR: ${{ vars.START_YEAR }}
+          END_YEAR: ${{ vars.END_YEAR }}
+          NAME: ${{ vars.NAME }}
         run: python heatmap.py
       - name: Commit and push changes
         run: |
