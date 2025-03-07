@@ -7,12 +7,12 @@ from svgwrite import Drawing
 from svgwrite.animate import Animate
 
 # Constants from github_heatmap.config
-TRACK_COLOR = "#9BE9A8"
-TRACK_SPECIAL_COLOR = "#40C463"
-TRACK_SPECIAL2_COLOR = "#30A14E"
-TRACK_SPECIAL3_COLOR = "#216E39"
-DEFAULT_DOM_COLOR = "#EBEDF0"  # 修改空白格子背景色
-TEXT_COLOR = "#2D3436"
+TRACK_COLOR = os.getenv("TRACK_COLOR")
+TRACK_SPECIAL_COLOR = os.getenv("TRACK_SPECIAL_COLOR")
+TRACK_SPECIAL2_COLOR = os.getenv("TRACK_SPECIAL2_COLOR")
+TRACK_SPECIAL3_COLOR = os.getenv("TRACK_SPECIAL3_COLOR")
+DEFAULT_DOM_COLOR = os.getenv("DEFAULT_DOM_COLOR")
+TEXT_COLOR = os.getenv("TEXT_COLOR")
 NAME = os.getenv("NAME")
 DOM_BOX_DICT = {
     1: {"dom": [(10, 10)]},
