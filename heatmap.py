@@ -228,7 +228,7 @@ class Drawer:
                 
                 github_rect_day += datetime.timedelta(1)
                 
-        offset.y += size * 7 + 30  # 增加年份之间的间距
+        offset.y += size * 7 + 10  # 增加年份之间的间距
 
     def draw(self, dr, offset, is_summary=False):
         """绘制完整的热力图"""
@@ -344,7 +344,7 @@ def calculate_svg_dimensions(poster):
     # 计算宽度：53周 * 格子尺寸 + 月份标签宽度
     svg_width = 54 * (cell_size + padding) + month_label_width
     # 计算高度：年份数量 * (7行格子 + 标题高度 + 年份间距) + 图例高度
-    svg_height = year_count * (7 * (cell_size + padding) + 50) + 20  # 需要图例则增加70
+    svg_height = year_count * (7 * (cell_size + padding) + 30) + 20  # 需要图例则增加70
     
     return svg_width, svg_height
 
