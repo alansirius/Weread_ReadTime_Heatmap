@@ -144,8 +144,15 @@ class Drawer:
 
     def draw_one_calendar(self, dr, year, offset):
         """绘制单年的日历热力图"""
-        # 计算该年1月1日是星期几
+        # 计算该年1月1日是星期几(0是周一，6是周日)
         start_date_weekday, _ = calendar.monthrange(year, 1)
+        
+        # 调整weekday，使星期日为第一天(与GitHub保持一致)
+        if start_date_weekday == 6:  # 如果是周日
+            start_date_weekday = 0
+        else:
+            start_date_weekday += 1
+            
         github_rect_first_day = datetime.date(year, 1, 1)
         github_rect_day = github_rect_first_day + datetime.timedelta(-start_date_weekday)
 
@@ -174,33 +181,54 @@ class Drawer:
         # 绘制日历格子
         size = DOM_BOX_PADING + DOM_BOX_TUPLE[1]
         rect_x = offset.x
-        month = MONTH_NAMES[0]
+        current_month = -1  # 初始化为不存在的月份值
 
-        for index in range(54):
-            # 添加月份标签
-            if index == 0 or (index > 0 and index < 53 and month != MONTH_NAMES[github_rect_day.month - 1]):
-                month = MONTH_NAMES[github_rect_day.month - 1]
-                dr.add(
-                    dr.text(
-                        f"{month}",
-                        insert=(rect_x, offset.y),
-                        fill=self.poster.colors["text"],
-                        style=self.month_names_style,
+        # 绘制月份标签位置
+        month_positions = []
+        temp_day = github_rect_day
+        for week in range(54):
+            if temp_day.month != current_month and temp_day.year == year:
+                month_positions.append((week, temp_day.month))
+                current_month = temp_day.month
+            temp_day += datetime.timedelta(7)  # 前进一周
+        
+        # 重置
+        current_month = -1
+        
+        # 绘制周格子
+        for week_index in range(54):
+            rect_x = offset.x + week_index * size
+            
+            # 检查并添加月份标签
+            for week_pos, month_num in month_positions:
+                if week_index == week_pos:
+                    month_name = MONTH_NAMES[month_num - 1]
+                    dr.add(
+                        dr.text(
+                            f"{month_name}",
+                            insert=(rect_x, offset.y),
+                            fill=self.poster.colors["text"],
+                            style=self.month_names_style,
+                        )
                     )
-                )
-
+            
             # 绘制一周的格子
-            for week in range(7):
-                if int(github_rect_day.year) > year:
+            for day_in_week in range(7):
+                if github_rect_day.year > year:
                     break
-                rect_y = offset.y + size * week + DOM_BOX_PADING
+                    
+                rect_y = offset.y + size * day_in_week + DOM_BOX_PADING
                 date_title = str(github_rect_day)
-                day_tracks = self.poster.tracks.get(date_title, 0)
-                rect = self.gen_day_box(dr, rect_x, rect_y, date_title, day_tracks)
-                dr.add(rect)
+                
+                # 只为当前年份的日期绘制格子
+                if github_rect_day.year == year:
+                    day_tracks = self.poster.tracks.get(date_title, 0)
+                    rect = self.gen_day_box(dr, rect_x, rect_y, date_title, day_tracks)
+                    dr.add(rect)
+                
                 github_rect_day += datetime.timedelta(1)
-            rect_x += size
-        offset.y += size * 7
+                
+        offset.y += size * 7 + 30  # 增加年份之间的间距
 
     def draw(self, dr, offset, is_summary=False):
         """绘制完整的热力图"""
@@ -314,9 +342,9 @@ def calculate_svg_dimensions(poster):
     month_label_width = 30  # 月份标签宽度
     
     # 计算宽度：53周 * 格子尺寸 + 月份标签宽度
-    svg_width = 53 * (cell_size + padding) + month_label_width
-    # 计算高度：年份数量 * (7行格子 + 标题高度) + 图例高度
-    svg_height = year_count * (7 * (cell_size + padding) + 30) + 70  # 增加图例高度
+    svg_width = 54 * (cell_size + padding) + month_label_width
+    # 计算高度：年份数量 * (7行格子 + 标题高度 + 年份间距) + 图例高度
+    svg_height = year_count * (7 * (cell_size + padding) + 50) + 70  # 增加图例高度
     
     return svg_width, svg_height
 
@@ -381,12 +409,12 @@ def main():
     
     # 创建SVG绘图对象
     dr = Drawing('heatmap.svg', size=(svg_width, svg_height))
-    offset = Offset(0, 20)  # 初始偏移
+    offset = Offset(30, 30)  # 增加初始偏移，给左侧和顶部留出空间
     
     # 添加标题
     dr.add(dr.text(
         NAME,
-        insert=(0, 20), 
+        insert=(offset.x, 20), 
         fill=poster.colors["text"],
         style=f"font-size:20px; font-family:Arial;font-weight:bold;"
     ))
@@ -395,7 +423,7 @@ def main():
     drawer.draw(dr, offset)
     
     # 计算图例位置并绘制图例
-    # legend_offset = Offset(0, svg_height - 50)
+    # legend_offset = Offset(offset.x, svg_height - 50)
     # drawer.draw_legend(dr, legend_offset)
     
     dr.save()
