@@ -27,7 +27,6 @@ YEAR_FONT_SIZE = 14
 MONTH_FONT_SIZE = 10
 DOM_BOX_PADING = 2
 DOM_BOX_RADIUS = 2
-WEREAD_COOKIE = "wr_fp=1762718669; wr_vid=365204818; wr_rt=web%40YjBCvyrOXJguITRcOMh_AL; wr_skey=1jgkQQzq"
 
 class Drawer:
     name = "readtime"
