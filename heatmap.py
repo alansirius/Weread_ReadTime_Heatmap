@@ -409,7 +409,7 @@ def main():
     
     # 创建SVG绘图对象
     dr = Drawing('heatmap.svg', size=(svg_width, svg_height))
-    # offset = Offset(30, 30)  # 增加初始偏移，给左侧和顶部留出空间
+    offset = Offset(0, 0)  # 增加初始偏移，给左侧和顶部留出空间
     
     # 添加标题
     dr.add(dr.text(
