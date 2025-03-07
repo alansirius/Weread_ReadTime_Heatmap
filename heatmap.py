@@ -171,6 +171,8 @@ class Drawer:
         else:
             year_duration = f"{year_hours}小时{year_minutes}分钟"
 
+        offset.y += DOM_BOX_PADING + YEAR_FONT_SIZE
+        
         # 绘制日历格子
         size = DOM_BOX_PADING + DOM_BOX_TUPLE[1]
         rect_x = offset.x
