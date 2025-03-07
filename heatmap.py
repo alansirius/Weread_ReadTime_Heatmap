@@ -11,8 +11,9 @@ TRACK_COLOR = "#9BE9A8"
 TRACK_SPECIAL_COLOR = "#40C463"
 TRACK_SPECIAL2_COLOR = "#30A14E"
 TRACK_SPECIAL3_COLOR = "#216E39"
-DEFAULT_DOM_COLOR = "#EBEDF0" 
+DEFAULT_DOM_COLOR = "#EBEDF0"  # 修改空白格子背景色
 TEXT_COLOR = "#2D3436"
+NAME = os.getenv("NAME")
 DOM_BOX_DICT = {
     1: {"dom": [(10, 10)]},
     2: {"dom": [(10, 5), (10, 5)]},
@@ -271,12 +272,28 @@ def main():
         total = sum([duration for date, duration in tracks.items() if date.startswith(str(year))])
         poster.total_sum_year_dict[year] = total
     
-    # 动态计算 SVG 高度
+    # 动态计算 SVG 尺寸
     year_count = poster.end_year - poster.start_year + 1
-    svg_height = 100 + year_count * 115  # 每增加一年，高度增加 200
-
-    dr = Drawing('heatmap.svg', size=(800, svg_height))
-    offset = Offset(50, 50)
+    cell_size = 10  # 每个格子的尺寸
+    padding = 2  # 格子间距
+    month_label_width = 30  # 月份标签宽度
+    
+    # 计算宽度：53周 * 格子尺寸 + 月份标签宽度
+    svg_width = 53 * (cell_size + padding) + month_label_width
+    # 计算高度：年份数量 * (7行格子 + 标题高度)
+    svg_height = year_count * (7 * (cell_size + padding) + 30) + 20
+    
+    dr = Drawing('heatmap.svg', size=(svg_width, svg_height))
+    offset = Offset(0, 20)  # 去除边距
+    
+    # 添加标题
+    dr.add(dr.text(
+        NAME,
+        insert=(0, 20), 
+        fill=poster.colors["text"],
+        style=f"font-size:20px; font-family:Arial;"
+    ))
+    
     drawer.draw(dr, offset)
     dr.save()
 
