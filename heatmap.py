@@ -46,7 +46,7 @@ class Drawer:
 
     def make_color(self, length_range, length):
         color_from = self.poster.colors["track"]
-        color_to = self.poster.colors["special2"]
+        color_to = self.poster.colors["special3"]
         diff = length_range.diameter()
         if diff == 0:
             return color_from
