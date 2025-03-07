@@ -171,18 +171,6 @@ class Drawer:
         else:
             year_duration = f"{year_hours}小时{year_minutes}分钟"
 
-        # 添加年份标题（不再显示阅读时间）
-        offset.y += DOM_BOX_PADING + YEAR_FONT_SIZE
-        dr.add(
-            dr.text(
-                f"{year}",
-                insert=offset.tuple(),
-                fill=self.poster.colors["text"],
-                style=self.year_style,
-            )
-        )
-        offset.y += DOM_BOX_PADING + MONTH_FONT_SIZE
-
         # 绘制日历格子
         size = DOM_BOX_PADING + DOM_BOX_TUPLE[1]
         rect_x = offset.x
@@ -239,7 +227,7 @@ class Drawer:
         # 在日历底部添加年度总阅读时间
         dr.add(
             dr.text(
-                f"年度总阅读时间: {year_duration}",
+                f"{year}年度总阅读时间: {year_duration}",
                 insert=(offset.x, last_box_y + 15),  # 放在最后一行格子下方
                 fill=self.poster.colors["text"],
                 style=self.summary_style,
