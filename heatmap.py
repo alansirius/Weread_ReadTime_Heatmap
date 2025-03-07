@@ -344,7 +344,7 @@ def calculate_svg_dimensions(poster):
     # 计算宽度：53周 * 格子尺寸 + 月份标签宽度
     svg_width = 54 * (cell_size + padding) + month_label_width
     # 计算高度：年份数量 * (7行格子 + 标题高度 + 年份间距) + 图例高度
-    svg_height = year_count * (7 * (cell_size + padding) + 30) + 20  # 需要图例则增加70
+    svg_height = year_count * (7 * (cell_size + padding) + 30) + 30  # 需要图例则增加70
     
     return svg_width, svg_height
 
@@ -409,7 +409,7 @@ def main():
     
     # 创建SVG绘图对象
     dr = Drawing('heatmap.svg', size=(svg_width, svg_height))
-    offset = Offset(0, 20)  # 增加初始偏移，给左侧和顶部留出空间
+    offset = Offset(0, 30)  # 增加初始偏移，给左侧和顶部留出空间
     
     # 添加标题
     dr.add(dr.text(
