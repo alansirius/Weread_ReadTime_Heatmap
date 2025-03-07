@@ -159,10 +159,50 @@ def get_readtiming_data(cookie):
     else:
         raise Exception(f"Failed to fetch data: {response.status_code}")
 
-def refresh_cookie():
-    # 这里需要用户提供新的 cookie
-    new_cookie = input("Please enter the new cookie: ")
-    return new_cookie
+def refresh_cookies(cookie):
+        """
+        尝试通过API刷新cookies
+        
+        注意: 微信读书没有公开的API用于刷新令牌。
+        这是一个模拟实现 - 实际操作中，您可能需要:
+        1. 使用无头浏览器如Selenium或Playwright
+        2. 实现二维码扫描流程
+        3. 或定期手动更新cookies
+        
+        返回:
+            元组 (是否成功, 新的cookies)
+        """
+        print("尝试刷新cookies...")
+        print("注意: 由于微信读书的认证系统通常需要扫描二维码，")
+        print("因此可能无法在没有用户交互的情况下实现完全自动刷新。")
+        
+        url = "https://weread.qq.com/"
+        headers = {
+            "Cookie": cookie
+        }
+        
+        try:
+            response = requests.get(url, headers=headers)
+            new_cookies = response.cookies.get_dict()
+            print(f"刷新后的cookies: {new_cookies}")
+            
+            # 更新cookie
+            cookie_parts = cookie.split(';')
+            updated_cookie = []
+            for part in cookie_parts:
+                key = part.split('=')[0].strip()
+                if key not in new_cookies:
+                    updated_cookie.append(part)
+            
+            for key, value in new_cookies.items():
+                updated_cookie.append(f"{key}={value}")
+            
+            updated_cookie_str = '; '.join(updated_cookie)
+            print("已生成新的cookie")
+            return True, updated_cookie_str
+        except Exception as e:
+            print(f"刷新cookies时出错: {e}")
+            return False, None
 
 def main():
     cookie = os.getenv("WEREAD_COOKIE")  # 从环境变量中获取 cookie
@@ -171,10 +211,24 @@ def main():
 
     try:
         data = get_readtiming_data(cookie)
+        if data.get("errCode") == 1001:  # 假设1001表示未登录
+            print("检测到未登录状态，尝试刷新cookies...")
+            success, new_cookie = refresh_cookies(cookie)
+            if success:
+                print("cookies刷新成功，重新获取数据...")
+                cookie = new_cookie
+                data = get_readtiming_data(cookie)
+                if data.get("errCode") == 1001:
+                    print("自动刷新cookies后仍然未登录")
+                    print("请按照以下步骤手动更新cookies：")
+                    print("1. 打开微信读书网页版")
+                    print("2. 登录您的账号")
+                    print("3. 使用开发者工具获取新的cookies")
+                    print("4. 替换WEREAD_COOKIE环境变量")
+            else:
+                print("cookies刷新失败，请手动更新cookies")
     except Exception as e:
-        print(f"Error: {e}")
-        cookie = refresh_cookie()
-        data = get_readtiming_data(cookie)
+        print(f"获取阅读数据时出错: {e}")
 
     class Poster:
         def __init__(self):
