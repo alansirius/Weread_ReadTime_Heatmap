@@ -27,6 +27,7 @@ YEAR_FONT_SIZE = 14
 MONTH_FONT_SIZE = 10
 DOM_BOX_PADING = 2
 DOM_BOX_RADIUS = 2
+WEREAD_COOKIE = "wr_fp=1762718669; wr_vid=365204818; wr_rt=web%40YjBCvyrOXJguITRcOMh_AL; wr_skey=1jgkQQzq"
 
 class Drawer:
     name = "readtime"
@@ -156,6 +157,8 @@ def get_readtiming_data(cookie):
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         return response.json()
+    elif response.status_code == 401:
+        return {"errCode": 1001, "message": "未授权，请重新登录"}
     else:
         raise Exception(f"Failed to fetch data: {response.status_code}")
 
@@ -205,9 +208,11 @@ def refresh_cookies(cookie):
             return False, None
 
 def main():
-    cookie = os.getenv("WEREAD_COOKIE")  # 从环境变量中获取 cookie
+    cookie = os.getenv("WEREAD_COOKIE")  # 从环境变量中获取 cookie?
     if not cookie:
         raise Exception("WEREAD_COOKIE environment variable is required")
+    
+    data = None  # 初始化data变量
 
     try:
         data = get_readtiming_data(cookie)
@@ -220,11 +225,6 @@ def main():
                 data = get_readtiming_data(cookie)
                 if data.get("errCode") == 1001:
                     print("自动刷新cookies后仍然未登录")
-                    print("请按照以下步骤手动更新cookies：")
-                    print("1. 打开微信读书网页版")
-                    print("2. 登录您的账号")
-                    print("3. 使用开发者工具获取新的cookies")
-                    print("4. 替换WEREAD_COOKIE环境变量")
             else:
                 print("cookies刷新失败，请手动更新cookies")
     except Exception as e:
@@ -256,6 +256,10 @@ def main():
     poster = Poster()
     drawer = Drawer(poster)
 
+    if data is None:
+        print("无法获取阅读数据，请检查网络连接或cookie是否有效")
+        return
+        
     tracks = drawer._process_read_times(data['readTimes'])
     poster.tracks = tracks
 
