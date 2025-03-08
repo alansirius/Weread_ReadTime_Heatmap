@@ -8,13 +8,13 @@ from svgwrite import Drawing
 from svgwrite.animate import Animate
 
 # 常量配置
-TRACK_COLOR = os.getenv("TRACK_COLOR", "#ebedf0")  # 默认颜色（无阅读时间）
+TRACK_COLOR = os.getenv("TRACK_COLOR", "#EBEDF0")  # 默认颜色（无阅读时间）
 TRACK_SPECIAL1_COLOR = os.getenv("TRACK_SPECIAL1_COLOR", "#9BE9A8")  # 轻度阅读（0-30分钟）
 TRACK_SPECIAL2_COLOR = os.getenv("TRACK_SPECIAL2_COLOR", "#40C463")  # 中度阅读（30分钟-1小时）
 TRACK_SPECIAL3_COLOR = os.getenv("TRACK_SPECIAL3_COLOR", "#30A14E")  # 重度阅读（1-2小时）
 TRACK_SPECIAL4_COLOR = os.getenv("TRACK_SPECIAL4_COLOR", "#216E39")  # 深度阅读（2小时以上）
-DEFAULT_DOM_COLOR = os.getenv("DEFAULT_DOM_COLOR", "#ebedf0")  # 默认日期块颜色
-TEXT_COLOR = os.getenv("TEXT_COLOR", "#24292e")  # 文本颜色
+DEFAULT_DOM_COLOR = os.getenv("DEFAULT_DOM_COLOR", "#EBEDF0")  # 默认日期块颜色
+TEXT_COLOR = os.getenv("TEXT_COLOR", "#24292E")  # 文本颜色
 NAME = os.getenv("NAME", "微信阅读热力图")  # 图表标题
 DOM_BOX_TUPLE = (10, 10)        # 格子尺寸
 DOM_BOX_PADING = 2              # 格子间距
