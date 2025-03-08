@@ -48,28 +48,28 @@
 
 | 颜色值       | 预览                               |
 |--------------|-----------------------------------|
-| `#9BE9A8` | [HTMLColorCodes](https://htmlcolorcodes.com/#9BE9A8) |
-| `#40C463` | [HTMLColorCodes](https://htmlcolorcodes.com/#40C463) |
-| `#30A14E` | [HTMLColorCodes](https://htmlcolorcodes.com/#30A14E) |
-| `#216E39` | [HTMLColorCodes](https://htmlcolorcodes.com/#216E39) |
+| `#9BE9A8` | ![9BE9A8](./assets/9BE9A8.svg) |
+| `#40C463` | ![40C463](./assets/40C463.svg) |
+| `#30A14E` | ![30A14E](./assets/30A14E.svg) |
+| `#216E39` | ![FFF7B2](./assets/216E39.svg) |
 
 ### 秋天
 
 | 颜色值       | 预览                               |
 |--------------|-----------------------------------|
-| `#FFF7B2` | [HTMLColorCodes](https://htmlcolorcodes.com/#FFF7B2) |
-| `#FFEE4A` | [HTMLColorCodes](https://htmlcolorcodes.com/#FFEE4A) |
-| `#FFD700` | [HTMLColorCodes](https://htmlcolorcodes.com/#FFD700) |
-| `#FFA500` | [HTMLColorCodes](https://htmlcolorcodes.com/#FFA500) |
+| `#FFF7B2` | ![FFF7B2](./assets/FFF7B2.svg) |
+| `#FFEE4A` | ![FFEE4A](./assets/FFEE4A.svg) |
+| `#FFD700` | ![FFD700](./assets/FFD700.svg) |
+| `#FFA500` | ![B5E1FF](./assets/FFA500.svg) |
 
 ### 天空
 
 | 颜色值       | 预览                               |
 |--------------|-----------------------------------|
-| `#B5E1FF` | [HTMLColorCodes](https://htmlcolorcodes.com/#FFF7B2) |
-| `#5AB6FD` | [HTMLColorCodes](https://htmlcolorcodes.com/#FFEE4A) |
-| `#34A7FF` | [HTMLColorCodes](https://htmlcolorcodes.com/#FFD700) |
-| `#0077CC` | [HTMLColorCodes](https://htmlcolorcodes.com/#FFA500) |
+| `#B5E1FF` | ![B5E1FF](./assets/B5E1FF.svg) |
+| `#5AB6FD` | ![5AB6FD](./assets/5AB6FD.svg) |
+| `#34A7FF` | ![34A7FF](./assets/34A7FF.svg) |
+| `#0077CC` | ![0077CC](./assets/0077CC.svg) |
 
 ## TIP
 
