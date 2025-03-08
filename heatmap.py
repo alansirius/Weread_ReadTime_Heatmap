@@ -14,12 +14,14 @@ TRACK_SPECIAL2_COLOR = os.getenv("TRACK_SPECIAL2_COLOR", "#40C463")  # 中度阅
 TRACK_SPECIAL3_COLOR = os.getenv("TRACK_SPECIAL3_COLOR", "#30A14E")  # 重度阅读（1-2小时）
 TRACK_SPECIAL4_COLOR = os.getenv("TRACK_SPECIAL4_COLOR", "#216E39")  # 深度阅读（2小时以上）
 DEFAULT_DOM_COLOR = os.getenv("DEFAULT_DOM_COLOR", "#EBEDF0")  # 默认日期块颜色
-TEXT_COLOR = os.getenv("TEXT_COLOR", "#24292E")  # 文本颜色
+TEXT_COLOR = os.getenv("TEXT_COLOR", "#24292E")  # 默认文本颜色
+TITLE_COLOR = os.getenv("TITLE_COLOR", "#24292E")
+YEAR_TXT_COLOR = os.getenv("YEAR_COLOR", "#24292E")
+MONTH_TXT_COLOR = os.getenv("MONTH_COLOR", "#24292E")
 NAME = os.getenv("NAME", "微信阅读热力图")  # 图表标题
 DOM_BOX_TUPLE = (10, 10)        # 格子尺寸
 DOM_BOX_PADING = 2              # 格子间距
 DOM_BOX_RADIUS = 2              # 格子圆角
-YEAR_TXT_COLOR= "#E29173"
 YEAR_FONT_SIZE = 14             # 年份字体大小
 MONTH_FONT_SIZE = 12            # 月份字体大小
 SUMMARY_FONT_SIZE = 12          # 年度总结字体大小
@@ -66,7 +68,10 @@ class Poster:
             "special3": TRACK_SPECIAL3_COLOR,  # 重度阅读（1-2小时）
             "special4": TRACK_SPECIAL4_COLOR,  # 深度阅读（2小时以上）
             "dom": DEFAULT_DOM_COLOR,
-            "text": TEXT_COLOR
+            "text_color": TEXT_COLOR,
+            "title_color": TITLE_COLOR,
+            "year_txt_color": YEAR_TXT_COLOR,
+            "month_txt_color": MONTH_TXT_COLOR
         }
         self.units = "secs"
         self.with_animation = False
@@ -85,8 +90,8 @@ class Drawer:
 
     def __init__(self, poster):
         self.poster = poster
-        self.year_style = f"font-size:{YEAR_FONT_SIZE}px; font-family:Arial; fill:{YEAR_TXT_COLOR}"
-        self.month_names_style = f"font-size:{MONTH_FONT_SIZE}px; font-family:Arial"
+        self.year_style = f"font-size:{YEAR_FONT_SIZE}px; font-family:Arial;"
+        self.month_names_style = f"font-size:{MONTH_FONT_SIZE}px; font-family:Arial;"
         self.summary_style = f"font-size:{SUMMARY_FONT_SIZE}px; font-family:Arial; font-style:italic;"
 
     def process_read_times(self, read_times):
@@ -204,7 +209,7 @@ class Drawer:
                         dr.text(
                             f"{month_name}",
                             insert=(rect_x, offset.y),
-                            fill=self.poster.colors["text"],
+                            fill=self.poster.colors["month_txt_color"],
                             style=self.month_names_style,
                         )
                     )
@@ -233,7 +238,7 @@ class Drawer:
             dr.text(
                 f"{year}年度总阅读时间: {year_duration}",
                 insert=(offset.x, last_box_y + 15),  # 放在最后一行格子下方
-                fill=self.poster.colors["text"],
+                fill=self.poster.colors["year_txt_color"],
                 style=self.summary_style,
             )
         )
@@ -257,7 +262,7 @@ class Drawer:
             dr.text(
                 legend_title,
                 insert=(offset.x, offset.y),
-                fill=self.poster.colors["text"],
+                fill=self.poster.colors["text_color"],
                 style=self.month_names_style,
             )
         )
@@ -293,7 +298,7 @@ class Drawer:
                 dr.text(
                     item["text"],
                     insert=(legend_x + DOM_BOX_TUPLE[0] + 5, legend_y + DOM_BOX_TUPLE[1] - 2),
-                    fill=self.poster.colors["text"],
+                    fill=self.poster.colors["text_color"],
                     style=f"font-size:{MONTH_FONT_SIZE}px; font-family:Arial;"
                 )
             )
@@ -427,7 +432,7 @@ def main():
     dr.add(dr.text(
         NAME,
         insert=(offset.x, 20), 
-        fill=poster.colors["text"],
+        fill=poster.colors["title_color"],
         style=f"font-size:20px; font-family:Arial; font-weight:bold;"
     ))
     
