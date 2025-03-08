@@ -20,7 +20,7 @@
 | ------------ | -- | ----- |
 | WEREAD_COOKIE |  wr_fp=123456789; wr_vid=12345678; wr_rt=XXXXXXXXXXXXXXXXX; wr_skey=XXXXXXXXXX   |     |
 
-4. 在`Settings->Secrets and variables`中添加`Variables`，以下按需自行修改值。
+4. 在`Settings->Secrets and variables`中添加`Variables`，以下按需自行添加、修改键值，如果无所谓默认样式则无须添加。
 
 | Variables键      | （默认）值        | 备注              |
 | ---------------- | --------- | -----------------------|
