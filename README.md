@@ -7,7 +7,9 @@
 
 之前阅读的热力图使用的是[Weread2NotionPro](https://github.com/malinkang/weread2notion-pro.git)项目进行生成。
 
-考虑到从Notion全面转向Obsidian，而且Obsidian中的Weread插件相比之下更容易使用且能够使用`dataviewjs`自定义展示方式，也因此搞了个[obsidian-readingcard](https://github.com/ZiGmaX809/obsidian-readingcard-template.git)的模板用以展示微信阅读的各项进度，基于此用了一天时间研究了一下相关Api和绘制脚本逻辑并结合AI的力量，重构了热力图生成脚本。
+考虑到从Notion全面转向Obsidian，而且Obsidian中的Weread插件相比之下更加友好并能够使用`dataviewjs`自定义展示方式，而我也因此搞了个[obsidian-readingcard](https://github.com/ZiGmaX809/obsidian-readingcard-template.git)的模板用以展示微信阅读的各项进度。
+
+基于上述原因，用了一天时间研究了一下相关Api和绘制脚本逻辑并使用AI（吹一波Claude的代码能力），重构了热力图生成脚本。
 
 ## 使用
 1. fork本项目。
