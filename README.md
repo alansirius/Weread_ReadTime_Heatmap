@@ -1,7 +1,7 @@
 # 微信阅读阅读时长的热力图生成
 
 ## 展示
-<img src="https://raw.githubusercontent.com/ZiGmaX809/WereadHeatmap/main/heatmap.svg">
+<img src="https://raw.githubusercontent.com/ZiGmaX809/Weread_ReadTime_Heatmap/main/heatmap.svg">
 
 ## 说明
 
