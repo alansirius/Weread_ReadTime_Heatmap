@@ -45,7 +45,7 @@
 
 | 颜色值       | 说明                  | 预览                               |
 |--------------|-----------------------|-----------------------------------|
-| `#9BE9A8` | 最浅色（低活跃度）     | <div style="background:#9BE9A8; width: 60px; height: 20px;"></div> |
+| `#9BE9A8` | 最浅色（低活跃度）     | [HTMLColorCodes](https://htmlcolorcodes.com/#9BE9A8 |
 | `#40C463` | 中等偏浅（原色 1）     | <div style="background:#40C463; width: 60px; height: 20px;"></div> |
 | `#30A14E` | 中等偏深（过渡色）     | <div style="background:#30A14E; width: 60px; height: 20px;"></div> |
 | `#216E39` | 最深色（高活跃度）     | <div style="background:#216E39; width: 60px; height: 20px;"></div> |
