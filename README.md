@@ -25,7 +25,7 @@
 | END_YEAR         | `2025`    | 结束年份                 |
 | NAME             | `ZiGma's Read Time Heatmap`    | 卡片标题  |
 | TEXT_COLOR       | #2D3436   |  文字颜色               |
-| TRACK_COLOR      | #9BE9A8   |  无阅读颜色              |
+| TRACK_COLOR      | #EBEDF0   |  无阅读颜色              |
 | TRACK_SPECIAL1_COLOR | #9BE9A8 |  一级颜色              |
 | TRACK_SPECIAL2_COLOR | #40C463 |  二级颜色              |
 | TRACK_SPECIAL3_COLOR | #30A14E |  三级颜色              |
