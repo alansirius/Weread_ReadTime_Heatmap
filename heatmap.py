@@ -75,7 +75,7 @@ class Poster:
         self.length_range_by_date = None
         self.total_sum_year_dict = {}
         # 从环境变量获取年份范围
-        self.start_year = int(os.getenv("START_YEAR", 2020))
+        self.start_year = int(os.getenv("START_YEAR", 2024))
         self.end_year = int(os.getenv("END_YEAR", 2025))
 
 class Drawer:
