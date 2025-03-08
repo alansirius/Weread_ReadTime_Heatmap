@@ -27,7 +27,10 @@
 | START_YEAR       | `2024`    | 开始年份                 |
 | END_YEAR         | `2025`    | 结束年份                 |
 | NAME             | 微信阅读热力图    | 卡片标题  |
-| TEXT_COLOR       | #2D3436   |  文字颜色               |
+| TEXT_COLOR       | #2D3436   |  默认文字颜色            |
+| TITLE_COLOR      | #2D3436   |  标题颜色               |
+| YEAR_TXT_COLOR   | #2D3436   |  年度阅读时间颜色         |
+| MONTH_TXT_COLOR  | #2D3436   |  月份标签颜色            |
 | TRACK_COLOR      | #EBEDF0   |  无阅读颜色              |
 | TRACK_SPECIAL1_COLOR | #9BE9A8 |  一级颜色              |
 | TRACK_SPECIAL2_COLOR | #40C463 |  二级颜色              |
