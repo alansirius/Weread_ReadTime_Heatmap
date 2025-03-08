@@ -25,9 +25,10 @@ jobs:
           END_YEAR: ${{ vars.END_YEAR }}
           NAME: ${{ vars.NAME }}
           TRACK_COLOR: ${{ vars.TRACK_COLOR }}
-          TRACK_SPECIAL_COLOR: ${{ vars.TRACK_SPECIAL_COLOR }}
+          TRACK_SPECIAL1_COLOR: ${{ vars.TRACK_SPECIAL1_COLOR }}
           TRACK_SPECIAL2_COLOR: ${{ vars.TRACK_SPECIAL2_COLOR }}
-          TRACK_SPECIAL3_COLOR: ${{ vars.TRACK_SPECIAL_COLOR }}
+          TRACK_SPECIAL3_COLOR: ${{ vars.TRACK_SPECIAL3_COLOR }}
+          TRACK_SPECIAL4_COLOR: ${{ vars.TRACK_SPECIAL4_COLOR }}
           DEFAULT_DOM_COLOR: ${{ vars.DEFAULT_DOM_COLOR }}
           TEXT_COLOR: ${{ vars.TEXT_COLOR }}
         run: python heatmap.py
