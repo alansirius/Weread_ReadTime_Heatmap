@@ -350,8 +350,8 @@ def calculate_svg_dimensions(poster):
     padding = DOM_BOX_PADING  # 格子间距
     month_label_width = 30  # 月份标签宽度
     
-    # 计算宽度：53周 * 格子尺寸 + 月份标签宽度
-    svg_width = 54 * (cell_size + padding) + month_label_width
+    # 计算宽度：53周 * 格子尺寸
+    svg_width = 54 * (cell_size + padding)
     # 计算高度：年份数量 * (7行格子 + 标题高度 + 年份间距 + 年度总结高度) + 图例高度
     svg_height = year_count * (7 * (cell_size + padding) + 30 + 20) + 30  # 增加每年底部总结的高度
     
