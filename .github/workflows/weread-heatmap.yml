@@ -31,6 +31,9 @@ jobs:
           TRACK_SPECIAL4_COLOR: ${{ vars.TRACK_SPECIAL4_COLOR }}
           DEFAULT_DOM_COLOR: ${{ vars.DEFAULT_DOM_COLOR }}
           TEXT_COLOR: ${{ vars.TEXT_COLOR }}
+          TITLE_COLOR: ${{ vars.TITLE_COLOR }}
+          YEAR_TXT_COLOR: ${{ vars.YEAR_TXT_COLOR }}
+          MONTH_TXT_COLOR: ${{ vars.MONTH_TXT_COLOR }}
         run: python heatmap.py
       - name: Commit and push changes
         run: |
