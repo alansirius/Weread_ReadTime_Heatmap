@@ -16,13 +16,13 @@
 2. 获取微信阅读的`cookie`—— 获取方法请查询相关项目的手册，仅需其中的`wr_fp=123456789; wr_vid=12345678; wr_rt=XXXXXXXXXXXXXXXXX; wr_skey=XXXXXXXXXX`，`cookie`过期会尝试自动刷新。
 3. 点击`Settings->Secrets and variables->New repository secret`中添加`SecretS`。
 
-| secret键       | 值   | 备注    |
-| :------------ | :-- | ----- |
+| Secrets键     | 值   | 备注    |
+| ------------ | -- | ----- |
 | WEREAD_COOKIE |  wr_fp=123456789; wr_vid=12345678; wr_rt=XXXXXXXXXXXXXXXXX; wr_skey=XXXXXXXXXX   |     |
 
 4. 在`Settings->Secrets and variables`中添加`Variables`，以下按需自行修改值。
 
-| variables键      | （默认）值        | 备注              |
+| Variables键      | （默认）值        | 备注              |
 | ---------------- | --------- | -----------------------|
 | START_YEAR       | `2024`    | 开始年份                 |
 | END_YEAR         | `2025`    | 结束年份                 |
@@ -41,24 +41,35 @@
 5. 项目自动运行后会在根目录下生成`heatmap.svg`文件，直接在Obsidian中进行引用即可。
 
 ## 配色参考
+
+自行逐个替换`TRACK_SPECIAL1_COLOR`至 `TRACK_SPECIAL4_COLOR`的值
+
 ### 默认配色
 
-| 颜色值       | 说明                  | 预览                               |
-|--------------|-----------------------|-----------------------------------|
-| `#9BE9A8` | 最浅色（低活跃度）     | [HTMLColorCodes](https://htmlcolorcodes.com/#9BE9A8) |
-| `#40C463` | 中等偏浅（原色 1）     | <div style="background:#40C463; width: 60px; height: 20px;"></div> |
-| `#30A14E` | 中等偏深（过渡色）     | <div style="background:#30A14E; width: 60px; height: 20px;"></div> |
-| `#216E39` | 最深色（高活跃度）     | <div style="background:#216E39; width: 60px; height: 20px;"></div> |
+| 颜色值       | 预览                               |
+|--------------|-----------------------------------|
+| `#9BE9A8` | [HTMLColorCodes](https://htmlcolorcodes.com/#9BE9A8) |
+| `#40C463` | [HTMLColorCodes](https://htmlcolorcodes.com/#40C463) |
+| `#30A14E` | [HTMLColorCodes](https://htmlcolorcodes.com/#30A14E) |
+| `#216E39` | [HTMLColorCodes](https://htmlcolorcodes.com/#216E39) |
 
 ### 秋天
 
-| 颜色值       | 说明                  | 预览                               |
-|--------------|-----------------------|-----------------------------------|
-| `#FFF7B2` | 最浅色（低活跃度）     | <div style="background:#FFF7B2; width: 60px; height: 20px;"></div> |
-| `#FFEE4A` | 中等偏浅（原色 1）     | <div style="background:#FFEE4A; width: 60px; height: 20px;"></div> |
-| `#FFD700` | 中等偏深（过渡色）     | <div style="background:#FFD700; width: 60px; height: 20px;"></div> |
-| `#FFA500` | 最深色（高活跃度）     | <div style="background:#FFA500; width: 60px; height: 20px;"></div> |
+| 颜色值       | 预览                               |
+|--------------|-----------------------------------|
+| `#FFF7B2` | [HTMLColorCodes](https://htmlcolorcodes.com/#FFF7B2) |
+| `#FFEE4A` | [HTMLColorCodes](https://htmlcolorcodes.com/#FFEE4A) |
+| `#FFD700` | [HTMLColorCodes](https://htmlcolorcodes.com/#FFD700) |
+| `#FFA500` | [HTMLColorCodes](https://htmlcolorcodes.com/#FFA500) |
 
+### 天空
+
+| 颜色值       | 预览                               |
+|--------------|-----------------------------------|
+| `#B5E1FF` | [HTMLColorCodes](https://htmlcolorcodes.com/#FFF7B2) |
+| `#5AB6FD` | [HTMLColorCodes](https://htmlcolorcodes.com/#FFEE4A) |
+| `#34A7FF` | [HTMLColorCodes](https://htmlcolorcodes.com/#FFD700) |
+| `#0077CC` | [HTMLColorCodes](https://htmlcolorcodes.com/#FFA500) |
 
 ## TIP
 
