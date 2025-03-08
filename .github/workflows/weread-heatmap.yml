@@ -31,6 +31,13 @@ jobs:
           DEFAULT_DOM_COLOR: ${{ vars.DEFAULT_DOM_COLOR }}
           TEXT_COLOR: ${{ vars.TEXT_COLOR }}
         run: python heatmap.py
+        continue-on-error: true  # 允许脚本失败但继续执行后续步骤
+      - name: Check script exit code
+        run: |
+          if [ $? -ne 0 ]; then
+            echo "脚本执行失败，可能是由于 cookie 失效"
+            exit 1  # 使工作流失败
+          fi
       - name: Commit and push changes
         run: |
           git config --global user.name "GitHub Actions"
