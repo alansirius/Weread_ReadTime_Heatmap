@@ -40,6 +40,28 @@
 
 5. 项目自动运行后会在根目录下生成`heatmap.svg`文件，直接在Obsidian中进行引用即可。
 
+## 配色参考
+### 默认配色
+```markdown
+| 颜色值       | 说明                  | 预览                               |
+|--------------|-----------------------|-----------------------------------|
+| `#9BE9A8` | 最浅色（低活跃度）     | <div style="background:#9BE9A8; width: 60px; height: 20px;"></div> |
+| `#40C463` | 中等偏浅（原色 1）     | <div style="background:#40C463; width: 60px; height: 20px;"></div> |
+| `#30A14E` | 中等偏深（过渡色）     | <div style="background:#30A14E; width: 60px; height: 20px;"></div> |
+| `#216E39` | 最深色（高活跃度）     | <div style="background:#216E39; width: 60px; height: 20px;"></div> |
+```
+
+### 秋天
+
+```markdown
+| 颜色值       | 说明                  | 预览                               |
+|--------------|-----------------------|-----------------------------------|
+| `#FFF7B2` | 最浅色（低活跃度）     | <div style="background:#FFF7B2; width: 60px; height: 20px;"></div> |
+| `#FFEE4A` | 中等偏浅（原色 1）     | <div style="background:#FFEE4A; width: 60px; height: 20px;"></div> |
+| `#FFD700` | 中等偏深（过渡色）     | <div style="background:#FFD700; width: 60px; height: 20px;"></div> |
+| `#FFA500` | 最深色（高活跃度）     | <div style="background:#FFA500; width: 60px; height: 20px;"></div> |
+```
+
 
 ## TIP
 
