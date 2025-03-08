@@ -6,12 +6,13 @@
 ## 说明
 
 之前是使用[Weread2Notion](https://github.com/malinkang/weread2notion-pro.git)进行生成，因去年转向Obsidian，Obsidian中的Weread插件跟符合我的胃口，我也因此搞了个[obsidian-readingcard](https://github.com/ZiGmaX809/obsidian-readingcard-template.git)的模板，用来展示微信阅读的进度
+
 考虑到原来生成热力图的方式还需要链接Notion感觉麻烦，所以用了一天时间结合AI重构了脚本
 
 ## 使用
 1. fork本项目
 2. 获取微信阅读的`cookie`—— 获取方法请查询相关项目的手册，仅需其中的`wr_fp=123456789; wr_vid=12345678; wr_rt=XXXXXXXXXXXXXXXXX; wr_skey=XXXXXXXXXX`，`cookie`过期会尝试自动刷新
-3. 点击Settings->Secrets and variables->New repository secret
+3. 点击`Settings->Secrets and variables->New repository secret`中添加`secret`
 
 | secret键       | 值   | 备注    |
 | :------------ | :-- | ----- |
