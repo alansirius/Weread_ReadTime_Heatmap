@@ -19,6 +19,7 @@ NAME = os.getenv("NAME", "微信阅读热力图")  # 图表标题
 DOM_BOX_TUPLE = (10, 10)        # 格子尺寸
 DOM_BOX_PADING = 2              # 格子间距
 DOM_BOX_RADIUS = 2              # 格子圆角
+YEAR_TXT_COLOR= "#E29173"
 YEAR_FONT_SIZE = 14             # 年份字体大小
 MONTH_FONT_SIZE = 12            # 月份字体大小
 SUMMARY_FONT_SIZE = 12          # 年度总结字体大小
@@ -84,7 +85,7 @@ class Drawer:
 
     def __init__(self, poster):
         self.poster = poster
-        self.year_style = f"font-size:{YEAR_FONT_SIZE}px; font-family:Arial;"
+        self.year_style = f"font-size:{YEAR_FONT_SIZE}px; font-family:Arial; fill:{YEAR_TXT_COLOR}"
         self.month_names_style = f"font-size:{MONTH_FONT_SIZE}px; font-family:Arial"
         self.summary_style = f"font-size:{SUMMARY_FONT_SIZE}px; font-family:Arial; font-style:italic;"
 
@@ -427,7 +428,7 @@ def main():
         NAME,
         insert=(offset.x, 20), 
         fill=poster.colors["text"],
-        style=f"font-size:20px; font-family:Arial;font-weight:bold;"
+        style=f"font-size:20px; font-family:Arial; font-weight:bold;"
     ))
     
     # 绘制热力图
