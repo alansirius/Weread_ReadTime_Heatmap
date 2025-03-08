@@ -20,16 +20,17 @@
 4. 在`Settings->Secrets and variables`中添加`variables`，以下按需自行修改值
 
 | variables键      | 值        | 备注                    |
-| ---------------- | --------- | ----------------------- |
+| ---------------- | --------- | -----------------------|
 | START_YEAR       | `2024`    | 开始年份                 |
 | END_YEAR         | `2025`    | 结束年份                 |
 | NAME             | `ZiGma's Read Time Heatmap`    | 卡片标题  |
 | TEXT_COLOR       | #2D3436   |  文字颜色               |
-| TRACK_COLOR      | #9BE9A8   |  一级颜色              |
-| TRACK_SPECIAL2_COLOR | #30A14E |  三级颜色                |
-| TRACK_SPECIAL3_COLOR | #216E39 |  四级颜色              |
-| TRACK_SPECIAL_COLOR | #40C463 |   二级颜色              |
-| DEFAULT_DOM_COLOR | #EBEDF0 | 空格颜色                  |
+| TRACK_COLOR      | #9BE9A8   |  无阅读颜色              |
+| TRACK_SPECIAL1_COLOR | #30A14E |  一级颜色              |
+| TRACK_SPECIAL2_COLOR | #30A14E |  二级颜色              |
+| TRACK_SPECIAL3_COLOR | #216E39 |  三级颜色              |
+| TRACK_SPECIAL4_COLOR | #40C463 |  四级颜色              |
+| DEFAULT_DOM_COLOR | #EBEDF0 | 默认格子颜色                  |
 
 5. 项目自动运行后会在根目录下生成`heatmap.svg`文件，直接在Obsidian中进行引用即可
 
