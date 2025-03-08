@@ -9,10 +9,10 @@ from svgwrite.animate import Animate
 
 # 常量配置
 TRACK_COLOR = os.getenv("TRACK_COLOR", "#ebedf0")  # 默认颜色（无阅读时间）
-TRACK_SPECIAL_COLOR = os.getenv("TRACK_SPECIAL_COLOR", "#9be9a8")  # 轻度阅读（0-30分钟）
-TRACK_SPECIAL2_COLOR = os.getenv("TRACK_SPECIAL2_COLOR", "#40c463")  # 中度阅读（30分钟-1小时）
-TRACK_SPECIAL3_COLOR = os.getenv("TRACK_SPECIAL3_COLOR", "#30a14e")  # 重度阅读（1-2小时）
-TRACK_SPECIAL4_COLOR = os.getenv("TRACK_SPECIAL4_COLOR", "#216e39")  # 深度阅读（2小时以上）
+TRACK_SPECIAL1_COLOR = os.getenv("TRACK_SPECIAL1_COLOR", "#9BE9A8")  # 轻度阅读（0-30分钟）
+TRACK_SPECIAL2_COLOR = os.getenv("TRACK_SPECIAL2_COLOR", "#40C463")  # 中度阅读（30分钟-1小时）
+TRACK_SPECIAL3_COLOR = os.getenv("TRACK_SPECIAL3_COLOR", "#30A14E")  # 重度阅读（1-2小时）
+TRACK_SPECIAL4_COLOR = os.getenv("TRACK_SPECIAL4_COLOR", "#216E39")  # 深度阅读（2小时以上）
 DEFAULT_DOM_COLOR = os.getenv("DEFAULT_DOM_COLOR", "#ebedf0")  # 默认日期块颜色
 TEXT_COLOR = os.getenv("TEXT_COLOR", "#24292e")  # 文本颜色
 NAME = os.getenv("NAME", "微信阅读热力图")  # 图表标题
@@ -60,7 +60,7 @@ class Poster:
         self.years = []
         self.colors = {
             "track": TRACK_COLOR,  # 无阅读
-            "special": TRACK_SPECIAL_COLOR,  # 轻度阅读（0-30分钟）
+            "special1": TRACK_SPECIAL1_COLOR,  # 轻度阅读（0-30分钟）
             "special2": TRACK_SPECIAL2_COLOR,  # 中度阅读（30分钟-1小时）
             "special3": TRACK_SPECIAL3_COLOR,  # 重度阅读（1-2小时）
             "special4": TRACK_SPECIAL4_COLOR,  # 深度阅读（2小时以上）
@@ -101,7 +101,7 @@ class Drawer:
         if duration == 0:
             return self.poster.colors["dom"]  # 无阅读
         elif duration < self.poster.reading_thresholds["light"]:
-            return self.poster.colors["special"]  # 轻度阅读（0-30分钟）
+            return self.poster.colors["special1"]  # 轻度阅读（0-30分钟）
         elif duration < self.poster.reading_thresholds["medium"]:
             return self.poster.colors["special2"]  # 中度阅读（30分钟-1小时）
         elif duration < self.poster.reading_thresholds["heavy"]:
@@ -265,7 +265,7 @@ class Drawer:
         size = DOM_BOX_TUPLE[0] + DOM_BOX_PADING
         legend_items = [
             {"color": self.poster.colors["dom"], "text": "无阅读"},
-            {"color": self.poster.colors["special"], "text": f"< {self.format_duration(self.poster.reading_thresholds['light'])}"},
+            {"color": self.poster.colors["special1"], "text": f"< {self.format_duration(self.poster.reading_thresholds['light'])}"},
             {"color": self.poster.colors["special2"], "text": f"< {self.format_duration(self.poster.reading_thresholds['medium'])}"},
             {"color": self.poster.colors["special3"], "text": f"< {self.format_duration(self.poster.reading_thresholds['heavy'])}"},
             {"color": self.poster.colors["special4"], "text": f">= {self.format_duration(self.poster.reading_thresholds['heavy'])}"}
