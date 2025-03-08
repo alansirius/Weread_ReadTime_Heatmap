@@ -23,7 +23,7 @@
 | ---------------- | --------- | -----------------------|
 | START_YEAR       | `2024`    | 开始年份                 |
 | END_YEAR         | `2025`    | 结束年份                 |
-| NAME             | `ZiGma's Read Time Heatmap`    | 卡片标题  |
+| NAME             | 微信阅读热力图    | 卡片标题  |
 | TEXT_COLOR       | #2D3436   |  文字颜色               |
 | TRACK_COLOR      | #EBEDF0   |  无阅读颜色              |
 | TRACK_SPECIAL1_COLOR | #9BE9A8 |  一级颜色              |
